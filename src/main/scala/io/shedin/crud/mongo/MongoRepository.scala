@@ -2,13 +2,12 @@ package io.shedin.crud.mongo
 
 import io.shedin.crud.lib.CrudRepository
 import reactivemongo.api.collections.bson.BSONCollection
-import reactivemongo.api.{DefaultDB, MongoConnection, MongoDriver}
+import reactivemongo.api.{DefaultDB, MongoConnection, MongoConnectionOptions, MongoDriver}
 import reactivemongo.bson.{BSONDocumentReader, BSONDocumentWriter, document}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-// TODO derive collection name from T
 // TODO maybe should just mix in AsyncCrudOperations[T] instead of CrudRepository[T]
 abstract class MongoRepository[T]
 (databaseName: String)
@@ -35,12 +34,10 @@ abstract class MongoRepository[T]
   }
 
   override def update(resourceId: String, resource: T): Future[Option[T]] = {
-    mongoCollection.flatMap(_.update(document("id" -> resourceId), resource)) map (_.n == 1)
     mongoCollection.flatMap(_.update(document("id" -> resourceId), resource)) map { updateWriteResult =>
       if (updateWriteResult.n == 0) None
       else if (updateWriteResult.n == 1) Some(resource)
-      else throw new RuntimeException("more than one doc update") // TODO revisit this
-
+      else throw new RuntimeException("more than one doc updated") // TODO revisit this
     }
   }
 

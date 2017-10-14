@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/edinhodzic/shedin-crud-lib.svg?branch=master)](https://travis-ci.org/edinhodzic/shedin-crud-lib)
+[![Build Status](https://travis-ci.org/edinhodzic/shedin-crud-mongo.svg?branch=master)](https://travis-ci.org/edinhodzic/shedin-crud-mongo)
 
 # About
 

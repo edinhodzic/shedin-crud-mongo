@@ -1,4 +1,6 @@
-# Background
+[![Build Status](https://travis-ci.org/edinhodzic/shedin-crud-lib.svg?branch=master)](https://travis-ci.org/edinhodzic/shedin-crud-lib)
+
+# About
 
     TODO write this up
 
